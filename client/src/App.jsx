@@ -1,28 +1,16 @@
-import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Signup from "./pages/Signup";
+import Tutorial from "./pages/Tutorial";
+import Dashboard from "./pages/Dashboard";
 
-function App() {
-  // define state here 👇
-  const [prompts, setPrompts] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/prompts")
-      .then((res) => res.json())
-      .then((data) => setPrompts(data))
-      .catch((err) => console.error(err));
-  }, []);
-
+export default function App() {
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">UX Arena Prompts</h1>
-      <ul className="mt-4">
-        {prompts.map((prompt) => (
-          <li key={prompt.id} className="border p-2 rounded mb-2">
-            <strong>{prompt.title}</strong> – {prompt.description}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Routes>
+      <Route path="/" element={<Landing />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/tutorial" element={<Tutorial />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   );
 }
-
-export default App;
